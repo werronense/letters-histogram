@@ -45,3 +45,34 @@ a img {
   border: none;
 }
 /* END RESET*/
+
+* {
+  box-sizing: border-box;
+}
+
+/* test css */
+div {
+  border: 1px dashed red;
+}
+
+/* basic layout */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  margin: 5vh auto;
+  width: 50vw;
+}
+
+/* display */
+.display {
+  border: 1px solid black;
+  height: 45vh;
+}
+
+/* input */
+.input {
+  border: 1px solid black;
+  flex: 1;
+  padding: 0.75em;
+}
