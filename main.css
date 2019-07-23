@@ -65,13 +65,13 @@ div {
 }
 
 /* display */
-.display {
+#display {
   border: 1px solid black;
   height: 45vh;
 }
 
 /* input */
-.input {
+#input {
   border: 1px solid black;
   flex: 1;
   padding: 0.75em;

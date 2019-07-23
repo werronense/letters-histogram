@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const input = document.querySelector(".input");
+  const input = document.querySelector("#input");
+  const display = document.querySelector("#display");
 
 
   // define functions
@@ -29,6 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(frequencyHistogram);
   });
 
-  
+
   input.focus();
 });
