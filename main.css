@@ -70,6 +70,11 @@ div {
   height: 45vh;
 }
 
+#display > svg {
+  height: 100%;
+  width: 100%;
+}
+
 /* input */
 #input {
   border: 1px solid black;

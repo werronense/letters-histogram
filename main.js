@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.querySelector("#input");
-  const display = document.querySelector("#display");
+  const display = d3.select("#display");
+  const chart = display.append("svg");
 
 
   // define functions
@@ -27,7 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const letters = makeLettersArray(e.target.textContent);
     const frequencyHistogram = convertArrayToHistogram(letters);
 
-    console.log(frequencyHistogram);
+    console.log(frequencyHistogram); // test
+
   });
 
 
