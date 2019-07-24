@@ -14,8 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // create data object
   const data = {
-    // define a getter method to return the histogram values in
-    // alphabetical order
+    // define a getter method to return the histogram values alphabetically
     get frequencies() {
       const orderedValues = [];
 
@@ -35,13 +34,29 @@ document.addEventListener("DOMContentLoaded", () => {
   const input = document.querySelector("#input");
 
   // d3 code for the histogram
+  const barWidth = 20;
+  const height = 200;
+  const width = 26 * barWidth;
+  const y = d3.scaleLinear()
+      .domain([0, 100])
+      .range([height, 0]);
   const display = d3.select("#display");
-  const chart = display.append("svg");
+  const chart = display.append("svg")
+      .attr("height", height)
+      .attr("width", width);
   const bar = chart.selectAll("g")
       .data(data.frequencies)
-      .enter().append("g");
+      .enter().append("g")
+      .attr("transform", (d, i) => "translate(" + i * barWidth + ", 0)");
 
-  // define functions
+  bar.append("rect")
+      //.attr("y", d => y(d))
+      .attr("y", y(10)) // temp test value
+      //.attr("height", d => d / 100)
+      .attr("height", height - y(10)) // temp test value
+      .attr("width", barWidth);
+
+  // define functions for event listenter
   function makeLettersArray(string) {
     return string.toLowerCase().split("").filter(
         letter => /[a-z]/.test(letter)

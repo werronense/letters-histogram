@@ -70,11 +70,6 @@ div {
   height: 45vh;
 }
 
-#display > svg {
-  height: 100%;
-  width: 100%;
-}
-
 svg rect {
   fill: purple;
 }
