@@ -75,6 +75,10 @@ div {
   width: 100%;
 }
 
+svg rect {
+  fill: purple;
+}
+
 /* input */
 #input {
   border: 1px solid black;
