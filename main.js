@@ -34,20 +34,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const input = document.querySelector("#input");
 
   // d3 code for the histogram
-  const barWidth = 20;
+  const barWidth = 25;
   const height = 200;
   const width = 26 * barWidth;
+
+  const x = d3.scaleLinear()
+      .domain([0, 26])
+      .range([0, width])
   const y = d3.scaleLinear()
       .domain([0, 100])
       .range([height, 0]);
+
+  const xAxis = d3.axisBottom(x)
+      .ticks(26)
+      .tickValues(null);
+  const yAxis = d3.axisRight(y);
+
   const display = d3.select("#display");
+
   const chart = display.append("svg")
-      .attr("height", height)
+      .attr("height", height + 50)
       .attr("width", width);
+
   const bar = chart.selectAll("g")
       .data(data.frequencies)
       .enter().append("g")
-      .attr("transform", (d, i) => "translate(" + i * barWidth + ", 0)");
+      .attr("transform", (d, i) => `translate(${i * barWidth})`);
 
   bar.append("rect")
       //.attr("y", d => y(d))
@@ -56,6 +68,16 @@ document.addEventListener("DOMContentLoaded", () => {
       .attr("height", height - y(10)) // temp test value
       .attr("width", barWidth);
 
+  bar.append("text")
+      .attr("x", (barWidth / 2) - 5)
+      .attr("y", 215)
+      .text((d, i) => alphabet[i]);
+  /*
+  d3.select("svg").append("g")
+      .attr("id", "x-axis")
+      .attr("transform", `translate(0, ${height})`)
+      .call(xAxis);
+  */
   // define functions for event listenter
   function makeLettersArray(string) {
     return string.toLowerCase().split("").filter(
