@@ -1,21 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // create data object and initialize it by looping char codes for
-  // all lower case letters and setting starting frequency to 0
+  function makeAlphabet() {
+    const series = [];
+
+    for (i = 97; i <= 122; i++) {
+      const letter = String.fromCharCode(i);
+      series.push(letter);
+    }
+
+    return series;
+  }
+
+  const alphabet = makeAlphabet();
+
+  // create data object
   const data = {
     // define a getter method to return the histogram values in
     // alphabetical order
     get frequencies() {
       const orderedValues = [];
-      for (i = 97; i <= 122; i++) {
-        orderedValues.push(data[String.fromCharCode(i)]);
-      }
+
+      alphabet.forEach(letter => {
+        orderedValues.push(this[letter]);
+      });
+
       return orderedValues;
     }
   };
 
-  for (i = 97; i <= 122; i++) {
-    data[String.fromCharCode(i)] = 0;
-  }
+  // initialize data object with alphabet as keys and each value set to 0
+  alphabet.forEach(letter => {
+    data[letter] = 0;
+  });
 
   const input = document.querySelector("#input");
 
@@ -23,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const display = d3.select("#display");
   const chart = display.append("svg");
   const bar = chart.selectAll("g")
-      .data(Object.values(data)) // current solution, resume here
+      .data(data.frequencies)
       .enter().append("g");
 
   // define functions
