@@ -47,19 +47,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const xAxis = d3.axisBottom(x)
       .ticks(26)
-      .tickValues(null);
-  const yAxis = d3.axisRight(y);
+  const yAxis = d3.axisLeft(y)
+      .ticks(5);
 
   const display = d3.select("#display");
 
   const chart = display.append("svg")
       .attr("height", height + 50)
-      .attr("width", width);
+      .attr("width", width + 25)
+      .attr("transform", "translate(40, 50)");
 
   const bar = chart.selectAll("g")
       .data(data.frequencies)
       .enter().append("g")
-      .attr("transform", (d, i) => `translate(${i * barWidth})`);
+      .attr("transform", (d, i) => `translate(${i * barWidth + 25}, 11)`);
 
   bar.append("rect")
       //.attr("y", d => y(d))
@@ -72,12 +73,19 @@ document.addEventListener("DOMContentLoaded", () => {
       .attr("x", (barWidth / 2) - 5)
       .attr("y", 215)
       .text((d, i) => alphabet[i]);
+
+  const svg = d3.select("svg")
+      .append("g")
+      .attr("id", "y-axis")
+      .attr("transform", "translate(25, 10)")
+      .call(yAxis);
   /*
   d3.select("svg").append("g")
       .attr("id", "x-axis")
       .attr("transform", `translate(0, ${height})`)
       .call(xAxis);
   */
+
   // define functions for event listenter
   function makeLettersArray(string) {
     return string.toLowerCase().split("").filter(
