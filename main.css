@@ -50,9 +50,19 @@ a img {
   box-sizing: border-box;
 }
 
-/* test css */
-div {
-  border: 1px dashed red;
+h1 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 1.75em;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
+h1, h2 {
+  font-family: sans-serif;
 }
 
 /* basic layout */
@@ -67,7 +77,7 @@ div {
 /* display */
 #display {
   border: 1px solid black;
-  height: 45vh;
+  height: 50vh;
 }
 
 svg rect {

@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const chart = display.append("svg")
       .attr("height", height + 50)
       .attr("width", width + 25)
-      .attr("transform", "translate(40, 50)");
+      .attr("transform", "translate(30, 10)");
 
   const bar = chart.selectAll("g")
       .data(data.frequencies, d => d)
@@ -79,13 +79,13 @@ document.addEventListener("DOMContentLoaded", () => {
     .attr("height", d => height - y(d.frequency))
     .attr("width", barWidth)
     .attr("id", d => d.letter);
-
+  /*
   const svg = d3.select("svg")
       .append("g")
       .attr("id", "y-axis")
       .attr("transform", "translate(25, 10)")
       .call(yAxis);
-
+  */
   // define functions for event listenter
   function makeLettersArray(string) {
     return string.toLowerCase().split("").filter(
