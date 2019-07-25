@@ -109,14 +109,19 @@ document.addEventListener("DOMContentLoaded", () => {
   input.addEventListener("keyup", e => {
     const letters = makeLettersArray(e.target.textContent);
     const frequencyHistogram = convertArrayToHistogram(letters);
-    const keysOfHistogram = Object.keys(frequencyHistogram);
+    const keysOfHistogram = Object.keys(data);
 
     keysOfHistogram.forEach(key => {
-      if (data[key] !== frequencyHistogram[key]) {
+      if (!frequencyHistogram[key]) {
+        data[key] = 0;
+      } else if (data[key] !== frequencyHistogram[key]) {
         data[key] = frequencyHistogram[key];
       }
     })
 
+    console.log(data.frequencies); // test
+    // identify each rect matching the id with the value of d.letter
+    // then update it with the new y and height values from d.frequency
     d3.selectAll("rect").data(data.frequencies, d => d.letter)
       .attr("y", d => y(d.frequency))
       .attr("height", d => height - y(d.frequency))
