@@ -16,13 +16,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const data = {
     // define a getter method to return the histogram values alphabetically
     get frequencies() {
-      const orderedValues = [];
+      const pairedValues = [];
 
       alphabet.forEach(letter => {
-        orderedValues.push(this[letter]);
+        const datum = {};
+
+        datum.letter = letter;
+        datum.frequency = this[letter];
+
+        pairedValues.push(datum);
       });
 
-      return orderedValues;
+      return pairedValues;
     }
   };
 
