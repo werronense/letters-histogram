@@ -75,7 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .text(d => d.letter);
 
   bar.append("rect")
-    .attr("height", d => d.frequency)
+    .attr("y", d => y(d.frequency))
+    .attr("height", d => height - y(d.frequency))
     .attr("width", barWidth)
     .attr("id", d => d.letter);
 
@@ -115,13 +116,13 @@ document.addEventListener("DOMContentLoaded", () => {
         data[key] = frequencyHistogram[key];
       }
     })
-    console.log(data.frequencies);
+
     d3.selectAll("rect").data(data.frequencies, d => d.letter)
-      .attr("height", d => d.frequency)
+      .attr("y", d => y(d.frequency))
+      .attr("height", d => height - y(d.frequency))
   });
 
 
   input.focus();
   console.log("running all"); // test
-  //console.log(data.frequencies); // test
 });
