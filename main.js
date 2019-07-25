@@ -76,7 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   bar.append("rect")
     .attr("height", d => d.frequency)
-    .attr("width", barWidth);
+    .attr("width", barWidth)
+    .attr("id", d => d.letter);
 
   const svg = d3.select("svg")
       .append("g")
@@ -115,6 +116,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
     console.log(data.frequencies);
+    d3.selectAll("rect").data(data.frequencies, d => d.letter)
+      .attr("height", d => d.frequency)
   });
 
 
