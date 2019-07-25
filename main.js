@@ -17,12 +17,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // define a getter method to return the histogram values alphabetically
     get frequencies() {
       const pairedValues = [];
+      let totalLetters = 0;
+
+      alphabet.forEach(letter => totalLetters += this[letter]);
 
       alphabet.forEach(letter => {
         const datum = {};
 
         datum.letter = letter;
-        datum.frequency = this[letter];
+        datum.frequency =
+            totalLetters > 0 ? 100 * (this[letter] / totalLetters) : 0;
 
         pairedValues.push(datum);
       });
@@ -50,8 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .domain([0, 100])
       .range([height, 0]);
 
-  const xAxis = d3.axisBottom(x)
-      .ticks(26)
   const yAxis = d3.axisLeft(y)
       .ticks(5);
 
@@ -63,33 +65,25 @@ document.addEventListener("DOMContentLoaded", () => {
       .attr("transform", "translate(40, 50)");
 
   const bar = chart.selectAll("g")
-      .data(data.frequencies)
+      .data(data.frequencies, d => d)
       .enter().append("g")
       .attr("transform", (d, i) => `translate(${i * barWidth + 25}, 11)`);
 
   bar.append("rect")
-      //.attr("y", d => y(d))
-      .attr("y", y(10)) // temp test value
-      //.attr("height", d => d / 100)
-      .attr("height", height - y(10)) // temp test value
+      .attr("y", d => y(d.frequency))
+      .attr("height", d => d.frequency)
       .attr("width", barWidth);
 
   bar.append("text")
       .attr("x", (barWidth / 2) - 5)
       .attr("y", 215)
-      .text((d, i) => alphabet[i]);
+      .text(d => d.letter);
 
   const svg = d3.select("svg")
       .append("g")
       .attr("id", "y-axis")
       .attr("transform", "translate(25, 10)")
       .call(yAxis);
-  /*
-  d3.select("svg").append("g")
-      .attr("id", "x-axis")
-      .attr("transform", `translate(0, ${height})`)
-      .call(xAxis);
-  */
 
   // define functions for event listenter
   function makeLettersArray(string) {
