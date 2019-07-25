@@ -69,15 +69,14 @@ document.addEventListener("DOMContentLoaded", () => {
       .enter().append("g")
       .attr("transform", (d, i) => `translate(${i * barWidth + 25}, 11)`);
 
-  bar.append("rect")
-      .attr("y", d => y(d.frequency))
-      .attr("height", d => d.frequency)
-      .attr("width", barWidth);
-
   bar.append("text")
-      .attr("x", (barWidth / 2) - 5)
-      .attr("y", 215)
-      .text(d => d.letter);
+    .attr("x", (barWidth / 2) - 5)
+    .attr("y", 215)
+    .text(d => d.letter);
+
+  bar.append("rect")
+    .attr("height", d => d.frequency)
+    .attr("width", barWidth);
 
   const svg = d3.select("svg")
       .append("g")
